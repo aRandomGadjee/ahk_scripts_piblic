@@ -5,6 +5,8 @@ SendMode "Input"
 SetTitleMatchMode 2
 SetTitleMatchMode "Slow"
 
+; Version 1.0.0
+
 #include ahk_credential_manager.ahk
 ;#include ahk_proxy_bypass.ahk
 #include ahk_screen_timeout_bypass.ahk
@@ -57,7 +59,12 @@ global UserProfilePath := EnvGet("USERPROFILE")
 ;#Esc::ToggleProxy(ProxySettingsKey) ;unused
 
 ; CapsLock = Hide Slack
-CapsLock::WinHide "ahk_exe slack.exe"
+CapsLock::{
+    if WinExist("ahk_exe slack.exe"){
+        WinHide "ahk_exe slack.exe"
+        return
+    }
+}
 
 ; Ctrl+Shift+V = Paste as comma-separated
 ^+v::{
